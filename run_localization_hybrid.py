@@ -25,13 +25,13 @@ try:
     import torch
     # Use official package instead of local lib
     from tabpfn import TabPFNClassifier
-    print("✅ TabPFN Library Loaded")
+    print("[INFO] TabPFN Library Loaded")
 except ImportError:
-    print("❌ TabPFN not found. Please run: pip install -r requirements.txt")
+    print("[ERROR] TabPFN not found. Please run: pip install -r requirements.txt")
     sys.exit(1)
 
 # ==========================================
-# ⚙️ Configuration
+# Configuration
 # ==========================================
 DATA_DIR = 'data'  # Place your Excel files here
 WINDOW_SIZE = 10
@@ -39,7 +39,7 @@ RANDOM_SEED = 42
 TARGET_COL = 'Location'
 OUTPUT_FILE = 'results.txt'
 
-# 🏆 Hybrid Strategy Hyperparameters
+# Hybrid Strategy Hyperparameters
 RETRIEVAL_K = 2048         # Total Context Size (Training Budget)
 TEMPORAL_RATIO = 0.5       # 50% Anchor (Stability) + 50% Spark (Innovation)
 NCA_COMPONENTS = 16        # Dimension of learned metric space
@@ -49,16 +49,16 @@ BATCH_SIZE = 50            # Batch size for inference loop
 # 1. Data Pipeline
 # ==========================================
 def load_and_preprocess():
-    print(f"\\n📂 Loading data from {DATA_DIR}...")
+    print(f"\n[INFO] Loading data from {DATA_DIR}...")
     if not os.path.exists(DATA_DIR):
-        print(f"❌ Data folder '{DATA_DIR}' missing. Please create it and add .xlsx files.")
+        print(f"[ERROR] Data folder '{DATA_DIR}' missing. Please create it and add .xlsx files.")
         return None, None, None
         
     # Load all Excel files
     files = sorted([f for f in os.listdir(DATA_DIR) if f.endswith('.xlsx')])
     dfs = []
     if not files:
-        print("❌ No .xlsx files found in data folder.")
+        print("[ERROR] No .xlsx files found in data folder.")
         return None, None, None
 
     for f in tqdm(files, desc="Reading Files"):
@@ -72,14 +72,14 @@ def load_and_preprocess():
     # Identify Columns
     target_candidates = [c for c in df_merged.columns if str(c).lower() == TARGET_COL.lower()]
     if not target_candidates: 
-        print(f"❌ Target column '{TARGET_COL}' not found.")
+        print(f"[ERROR] Target column '{TARGET_COL}' not found.")
         return None, None, None
     target_col = target_candidates[0]
     feature_cols = [c for c in df_merged.columns if c != target_col and 'value' in str(c)]
     
     df_clean = df_merged[feature_cols + [target_col]].dropna()
     
-    # 🌟 Label Cleaning (Consistency is Key)
+    # Label Cleaning (Consistency is Key)
     def clean_labels(val):
         s = str(val).lower().strip()
         if 'transition' in s: return 'Transition'
@@ -110,17 +110,17 @@ def create_sliding_windows(X, y):
     return np.array(Xs), np.array(ys)
 
 # ==========================================
-# 2. 🧠 Hybrid Temporal-Contrastive Logic
+# 2. Hybrid Temporal-Contrastive Logic
 # ==========================================
 def main():
-    print(f"🚀 Running Final Hybrid Script (ICSR 2026 -> IEEE IoT-J)")
-    print(f"   Strategy: 50% Temporal Anchor + 50% NCA Contrastive Retrieval")
+    print(f"[INFO] Running Final Hybrid Script (ICSR 2026 -> IEEE IoT-J)")
+    print(f"       Strategy: 50% Temporal Anchor + 50% NCA Contrastive Retrieval")
     
     # A. Prepare Data
     X_raw, y_raw, le = load_and_preprocess()
     if X_raw is None: return
     
-    print("🪟 Creating Windows...")
+    print("[INFO] Creating Windows...")
     X_3d, y_seq = create_sliding_windows(X_raw, y_raw)
     
     # Flatten for TabPFN (N, T*F)
@@ -131,11 +131,11 @@ def main():
     X_train, X_test = X_flat[:split_idx], X_flat[split_idx:]
     y_train, y_test = y_seq[:split_idx], y_seq[split_idx:]
     
-    print(f"   Train Bank: {len(X_train)}")
-    print(f"   Test Query: {len(X_test)}")
+    print(f"       Train Bank: {len(X_train)}")
+    print(f"       Test Query: {len(X_test)}")
     
     # B. Phase 1: Train Metric Learner (NCA)
-    print(f"\\n🔍 [Setup] Learning Manifold Metric (NCA/Metric Learning)...")
+    print(f"\n[INFO] [Setup] Learning Manifold Metric (NCA/Metric Learning)...")
     st = time.time()
     
     # Subsample for NCA training if dataset is huge (optional, here 6k is fine)
@@ -149,13 +149,13 @@ def main():
     knn_semantic = NearestNeighbors(n_neighbors=int(RETRIEVAL_K * (1-TEMPORAL_RATIO)), metric='euclidean', n_jobs=-1)
     knn_semantic.fit(X_train_nca)
     
-    print(f"   -> NCA Training Done ({time.time()-st:.1f}s)")
+    print(f"       -> NCA Training Done ({time.time()-st:.1f}s)")
 
     # C. Phase 2: Hybrid Inference Loop
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     classifier = TabPFNClassifier(device=device, n_estimators=32)
     
-    print(f"\\n🏎️  Starting Inference Loop (Batch Size={BATCH_SIZE})...")
+    print(f"\n[INFO] Starting Inference Loop (Batch Size={BATCH_SIZE})...")
     y_preds = []
     
     # Compute Temporal Context Indices ONCE (The "Anchor")
@@ -218,7 +218,7 @@ def main():
     bal_acc = balanced_accuracy_score(y_test, y_preds)
     mcc = matthews_corrcoef(y_test, y_preds)
     
-    print(f"\\n🏆 Final Hybrid Results:")
+    print(f"\n[INFO] Final Hybrid Results:")
     print(f"Accuracy:      {acc:.4f}")
     print(f"F1-Weighted:   {f1_w:.4f}")
     print(f"F1-Macro:      {f1_m:.4f}")
@@ -252,7 +252,7 @@ def main():
         f.write("\\nDetailed Report:\\n")
         f.write(rpt)
         
-    print(f"\\n📄 Saved to {OUTPUT_FILE}")
+    print(f"\\n[INFO] Saved to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
