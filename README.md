@@ -1,6 +1,6 @@
 # Robot House Sensor-based Human Activity Recognition
 
-A research project for ICSR 2026 focusing on Human Activity Recognition (HAR) using sensor data from a robot house environment.
+A research project focusing on Human Activity Recognition (HAR) using sensor data from a robot house environment.
 
 ## Project Overview
 
