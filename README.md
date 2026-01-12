@@ -13,12 +13,12 @@ In the era of **Active Ambient Intelligence (AmI)** and **Service Robotics**, tr
 This project introduces a **Manifold-Aligned Tabular Foundation Model** that bridges the gap between pre-trained priors and local deployment dynamics. By framing localization as a **Bayesian Meta-Learning** problem, our framework aligns the retrieval space with the task manifold to maximize context relevance.
 
 ### Key Features
-*   **🧠 Manifold-Aligned Retrieval**: Uses **Neighborhood Components Analysis (NCA)** to learn a differentiable metric space that clusters semantically similar states, preventing "metric collapse" in high-dimensional spaces.
-*   **🎯 Hybrid Context Contextualization**:
+*   ** Manifold-Aligned Retrieval**: Uses **Neighborhood Components Analysis (NCA)** to learn a differentiable metric space that clusters semantically similar states, preventing "metric collapse" in high-dimensional spaces.
+*   ** Hybrid Context Contextualization**:
     *   **Temporal Anchor**: Preserves local physical continuity.
     *   **Semantic Spark**: Recalls diverse, long-tail historical events via manifold-aligned search.
-*   **⚡ SOTA Performance**: Verified on the real-world **Robot House** dataset, significantly outperforming LSTM and Random Forest baselines.
-*   **🔒 Privacy-Preserving**: Operates purely on ambient binary sensors (PIR/Door), ensuring zero visual intrusion.
+*   ** SOTA Performance**: Verified on the real-world **Robot House** dataset, significantly outperforming LSTM and Random Forest baselines.
+*   ** Privacy-Preserving**: Operates purely on ambient binary sensors (PIR/Door), ensuring zero visual intrusion.
 
 ## 🛠️ Installation
 
