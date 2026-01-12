@@ -1,88 +1,45 @@
-# Robot House Sensor-based Human Activity Recognition
+# Retrieval-Augmented In-Context Learning for Continuous Indoor Localization
 
-A research project focusing on Human Activity Recognition (HAR) using sensor data from a robot house environment.
+**Abstract**—Indoor human localization is a critical measurand in smart homes and service robotics, yet ambient-sensor streams are characterized by **long-horizon non-stationary distribution shifts**, asynchronous sampling, and inherent sparsity. Under such conditions, tabular foundation inference becomes highly sensitive to context quality and prone to instability under strict deployment budgets. This paper investigates the **real-world** Robot House multi-sensor environment and proposes a hybrid retrieval-augmented tabular foundation inference framework, framed through the lens of **Bayesian Meta-Learning**. Under a fixed context budget, we perform structured context optimization to fortify the model's context-driven inference mechanism. Specifically, we introduce a **dual-stream** temporal-anchor–semantic-retrieval approach: the temporal anchor retains recent sequences to capture local dynamics, while semantic retrieval performs stochastic neighbor search within a **differentiable manifold** learned by Neighborhood Components Analysis (NCA) to **recall long-tail sparse events**. Experiments demonstrate that the proposed framework consistently outperforms temporal-only and semantic-only baselines **(achieving SOTA performance)**. Ablation studies further reveal that naive Euclidean retrieval in the original feature space leads to **catastrophic degradation**, underscoring the necessity of **task-specific metric learning** for retrieval-augmented in-context learning. Overall, the framework enables practical, privacy-preserving, and deployable indoor localization with **superior robustness** under noisy and incomplete sensing conditions.
 
-## Project Overview
+---
 
-This project analyzes sensor data collected from a smart home environment to recognize and classify human activities. The dataset includes various types of sensors such as motion sensors, door sensors, drawer sensors, contact sensors, and seat sensors.
+## Repository Structure
 
-## Dataset Description
+This repository contains the minimal code required to reproduce the core results of the paper.
 
-- **Data Files**: 11 Excel files containing sensor readings
-- **Total Records**: 14,447 data points
-- **Time Range**: July 11-13, 2024
-- **Features**: 24 columns including 21 sensor values
-- **Activities**: 39 different activity types
-- **Locations**: 15 different locations
+- `run_localization_hybrid.py`: The main script implementing the Hybrid (NCA + Temporal) Retrieval TabPFN strategy.
+- `requirements.txt`: Python dependencies.
 
-### Sensor Types
+## Installation
 
-| Category | Count | Examples |
-|----------|-------|----------|
-| Motion Sensors | 6 | Kitchen, Bedroom, Corridor, Dining, Sofa, Bathroom |
-| Door Sensors | 6 | Bathroom door, Bedroom door, Fridge door, etc. |
-| Drawer Sensors | 2 | Floor cupboard drawers |
-| Contact Sensors | 2 | Bed contact, Toilet Lid |
-| Seat Sensors | 5 | Sofa Seatplace 0-4 |
-
-### Main Activities
-
-- Working (42.8%)
-- Resting (11.1%)
-- Toiletting (7.1%)
-- Having lunch (5.8%)
-- Cooking (5.2%)
-- And 34 more activity types...
-
-## Project Structure
-
-```
-.
-├── data/                    # Sensor data files
-├── data_backup/             # Backup of original data
-├── data_analysis/           # Analysis scripts and reports
-│   ├── clean_sensor_columns.py
-│   ├── data_analysis.py
-│   └── data_statistics_report.txt
-├── visualization/           # Visualization scripts
-│   ├── data_visualization_v0.py
-│   ├── data_visualization_v1.py
-│   ├── data_visualization_v2.py
-│   └── data_visualization_v3.py
-└── pics/                    # Generated visualizations
-```
-
-## Requirements
-
-```
-pandas
-numpy
-matplotlib
-seaborn
-openpyxl
+```bash
+pip install -r requirements.txt
 ```
 
 ## Usage
 
-1. **Data Cleaning**:
-   ```bash
-   python data_analysis/clean_sensor_columns.py
-   ```
+1.  Place your dataset files (`.xlsx` format) in a folder named `data/` in the root directory.
+    - Format expectation: Columns should contain sensor values (e.g., `feature_1_value`) and a target column `Location`.
+2.  Run the framework:
 
-2. **Data Analysis**:
-   ```bash
-   python data_analysis/data_analysis.py
-   ```
-
-3. **Generate Visualizations**:
-   ```bash
-   python visualization/data_visualization_v0.py
-   ```
-
-## License
-
-This project is for academic research purposes.
+```bash
+python run_localization_hybrid.py
+```
 
 ## Citation
 
-If you use this dataset or code, please cite our ICSR 2026 paper (forthcoming).
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@article{zhang2026retrieval,
+  title={Retrieval-Augmented In-Context Learning for Continuous Indoor Localization},
+  author={Zhang, Baobing and et al.},
+  journal={IEEE Internet of Things Journal (Submitted)},
+  year={2026}
+}
+```
+
+## License
+
+MIT License.
