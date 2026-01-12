@@ -17,7 +17,7 @@ This project introduces a **Manifold-Aligned Tabular Foundation Model** that bri
 *   **🎯 Hybrid Context Contextualization**:
     *   **⚓ Temporal Anchor**: Preserves local physical continuity.
     *   **✨ Semantic Spark**: Recalls diverse, long-tail historical events via manifold-aligned search.
-*   **⚡ SOTA Performance**: Verified on the real-world **Robot House** dataset, significantly outperforming LSTM and Random Forest baselines.
+*   **⚡ SOTA Performance**: Verified on the real-world **Robot House** dataset, outperforming BiLSTM，Random Forest and modern Deep Learning baselines.
 *   **🔒 Privacy-Preserving**: Operates purely on ambient binary sensors (PIR/Door), ensuring zero visual intrusion.
 
 ## 🛠️ Installation
