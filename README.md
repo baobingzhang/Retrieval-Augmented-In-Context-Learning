@@ -53,18 +53,7 @@ pip install -r requirements.txt
 └── README.md                    # Project documentation
 ```
 
-## 🔗 Citation
 
-If you find this code useful, please cite our work:
-
-```bibtex
-@article{zhang2026manifold,
-  title={Manifold-Aligned In-Context Learning: Hybrid Retrieval-Augmented Tabular Foundation Models for Ambient Intelligence},
-  author={Zhang, Baobing and et al.},
-  journal={IEEE Internet of Things Journal (Submitted)},
-  year={2026}
-}
-```
 
 ## 📜 License
 
