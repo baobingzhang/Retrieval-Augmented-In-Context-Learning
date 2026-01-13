@@ -53,7 +53,7 @@ pip install -r requirements.txt
 └── README.md                    # Project documentation
 ```
 
- ’‘
+''
 ## 🔗 Citation
 
 If you find this code useful, please cite our work:
@@ -66,8 +66,7 @@ journal={IEEE Internet of Things Journal (Submitted)},
 year={2026}
 }
 ```
-’‘
-
+''
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
