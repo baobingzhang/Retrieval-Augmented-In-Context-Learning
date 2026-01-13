@@ -21,14 +21,22 @@ from sklearn.neighbors import NearestNeighbors, NeighborhoodComponentsAnalysis
 os.environ["TABPFN_MODEL_VERSION"] = "v2"
 warnings.filterwarnings('ignore')
 
+# Add src to python path to access local library
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
+
 try:
     import torch
-    # Use official package instead of local lib
-    from tabpfn import TabPFNClassifier
-    print("[INFO] TabPFN Library Loaded")
+    # Prioritize local library in src/tabpfn_lib
+    from tabpfn_lib import TabPFNClassifier
+    print("[INFO] Local TabPFN Library Loaded from src/tabpfn_lib")
 except ImportError:
-    print("[ERROR] TabPFN not found. Please run: pip install -r requirements.txt")
-    sys.exit(1)
+    try:
+        # Fallback to official package
+        from tabpfn import TabPFNClassifier
+        print("[INFO] Installed TabPFN Library Loaded")
+    except ImportError:
+        print("[ERROR] TabPFN not found. Please check src/tabpfn_lib or run: pip install -r requirements.txt")
+        sys.exit(1)
 
 # ==========================================
 # Configuration
