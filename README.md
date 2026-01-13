@@ -53,9 +53,9 @@ pip install -r requirements.txt
 └── README.md                    # Project documentation
 ```
 
-# ## 🔗 Citation
+## 🔗 Citation
 
-# If you find this code useful, please cite our work:
+If you find this code useful, please cite our work:
 
 ```bibtex
 @article{zhang2026manifold,
