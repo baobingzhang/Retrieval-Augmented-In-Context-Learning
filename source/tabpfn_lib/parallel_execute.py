@@ -113,6 +113,4 @@ def _execute_function_in_thread(
         # Theoretically it is possible to parallelise over classes of device other than
         # GPUs, but mainly this is useful for unit testing with multiple CPU devices.
         output = function(device=device, is_parallel=True)
-        return lambda: output
-    finally:
-        free_devices.put(device_index)
+        return lambda: output\n    finally:\n        free_devices.put(device_index)\n"
