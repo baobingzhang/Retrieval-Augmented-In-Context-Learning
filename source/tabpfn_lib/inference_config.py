@@ -183,8 +183,7 @@ class InferenceConfig:
             user_config: Config provided by the user at inference time.
                 If a dictionary, then the keys must match attributes of
                     `InferenceConfig` and will be used to override these attributes.
-                If an `InferenceConfig` object, then the whole config is overridden with
-                    the values from the user config.
+                If an `InferenceConfig` object, then the whole config is overridden with\n                    the values from the user config.
                 If None, then a copy of this config is returned with no fields changed.
         """
         if user_config is None:
