@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
-[![Paper](https://img.shields.io/badge/Paper-IEEE%20IoT--J%20(Accepted)-brightgreen)](https://github.com/baobingzhang/Retrieval-Augmented-In-Context-Learning)
+[![Paper](https://img.shields.io/badge/Paper-IEEE%20Internet%20of%20Things%20Journal%20(Accepted)-brightgreen)](https://github.com/baobingzhang/Retrieval-Augmented-In-Context-Learning)
 
 > Official PyTorch implementation of the paper **"Manifold-Aligned In-Context Learning: Hybrid Retrieval-Augmented Tabular Foundation Models for Ambient Intelligence"**.
 
