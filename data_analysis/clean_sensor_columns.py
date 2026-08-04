@@ -64,7 +64,7 @@ def main():
         
         # 覆盖保存
         df_cleaned.to_excel(filepath, index=False)
-        print(f"        ✅ 已保存")
+        print(f"        已保存")
     
     print("\n" + "=" * 60)
     print("  清洗完成!")

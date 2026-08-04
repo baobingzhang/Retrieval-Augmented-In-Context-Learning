@@ -297,28 +297,28 @@ def generate_summary_report(data, file_info):
                               数 据 集 汇 总 报 告
     ══════════════════════════════════════════════════════════════════════════════
     
-    📁 数据规模
+    数据规模
        ├─ 数据文件:       {len(file_info)} 个
        ├─ 总记录数:       {len(data):,} 条
        ├─ 特征列数:       {len(data.columns)} 列
        └─ 数据大小:       约 {len(data) * len(data.columns) / 1000:.1f}K 数据点
     
-    📅 时间跨度
+    时间跨度
        ├─ 起始时间:       {data['timestamp'].min().strftime('%Y-%m-%d %H:%M:%S')}
        ├─ 结束时间:       {data['timestamp'].max().strftime('%Y-%m-%d %H:%M:%S')}
        └─ 持续天数:       {(data['timestamp'].max() - data['timestamp'].min()).days + 1} 天
     
-    🏃 活动类型
+    活动类型
        ├─ 活动种类:       {data['Activity'].nunique()} 种
        ├─ 主要活动:       {data['Activity'].value_counts().index[0]} ({data['Activity'].value_counts().iloc[0]:,}条, {data['Activity'].value_counts().iloc[0]/len(data)*100:.1f}%)
        └─ 缺失率:         {data['Activity'].isnull().sum()/len(data)*100:.2f}%
     
-    📍 位置信息
+    位置信息
        ├─ 位置种类:       {data['Location'].nunique()} 种
        ├─ 主要位置:       {data['Location'].value_counts().index[0]} ({data['Location'].value_counts().iloc[0]:,}条, {data['Location'].value_counts().iloc[0]/len(data)*100:.1f}%)
        └─ 缺失率:         {data['Location'].isnull().sum()/len(data)*100:.2f}%
     
-    📡 传感器信息
+    传感器信息
        ├─ 传感器总数:     {len(value_cols)} 个
        ├─ 动作传感器:     {len([c for c in value_cols if 'motion' in c.lower()])} 个
        ├─ 门传感器:       {len([c for c in value_cols if 'door' in c.lower()])} 个
@@ -344,7 +344,7 @@ def main():
         # 加载数据
         print("\n  正在加载数据...")
         data, file_info = load_all_data()
-        print(f"  ✅ 已加载 {len(data):,} 条记录\n")
+        print(f"  已加载 {len(data):,} 条记录\n")
         
         # 各项分析
         analyze_basic_info(data, file_info)
@@ -357,8 +357,8 @@ def main():
         generate_summary_report(data, file_info)
         
         print("\n" + "=" * 80)
-        print("  ✅ 分析完成!")
-        print(f"  📄 完整报告已保存: {REPORT_FILE}")
+        print("  分析完成!")
+        print(f"  完整报告已保存: {REPORT_FILE}")
         print("=" * 80 + "\n")
         
     finally:
@@ -366,7 +366,7 @@ def main():
         sys.stdout = dual_output.terminal
         dual_output.close()
         
-    print(f"\n  📄 完整报告已保存: {REPORT_FILE}\n")
+    print(f"\n  完整报告已保存: {REPORT_FILE}\n")
 
 
 if __name__ == "__main__":

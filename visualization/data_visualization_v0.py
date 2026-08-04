@@ -106,7 +106,7 @@ def main():
     plt.close()
     
     print("\n" + "=" * 60)
-    print("  ✅ 可视化完成!")
+    print("  可视化完成!")
     print("=" * 60)
 
 
